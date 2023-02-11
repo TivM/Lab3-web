@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+              http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <navigation-rule>
+        <from-view-id>/views/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>toAppPage</from-outcome>
+            <to-view-id>/views/app.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/views/app.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>toHome</from-outcome>
+            <to-view-id>/views/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <managed-bean>
+        <managed-bean-name>resultBean</managed-bean-name>
+        <managed-bean-class>beans.ResultBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>dataBase</property-name>
+            <property-class>utils.DataBase</property-class>
+            <value>#{dataBaseBean}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>dataBaseBean</managed-bean-name>
+        <managed-bean-class>utils.DataBase</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+
+
+
+</faces-config>

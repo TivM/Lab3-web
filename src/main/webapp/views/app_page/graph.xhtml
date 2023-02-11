@@ -1,0 +1,151 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html">
+   <header>
+      <div class="page-header-me">
+         <span  class="page-header-text"><a> Trofimchenko Vlad</a></span>
+         <span class="page-header-text"><a>P32111</a></span>
+      </div>
+   </header>
+   <h:panelGroup id="graph">
+      <main class="content">
+<!--СТРАННО РИСУЮТСЯ ТОЧКИ, ИНОГДА ВООБЩЕ НЕ РИСУЮТСЯ, РАЗОБРАТЬСЯ!!!!!!-->
+         <section class="section-lab">
+<!--            <p:growl id="growlee" showDetail="true" />-->
+            <table>
+
+
+            <svg class="svg_container" id="svg_cont" width="300" height="300" xmlns="http://www.w3.org/2000/svg"
+                 onclick="checkHit()">
+               <!-- Оси координат -->
+               <line x1="0" x2="300" y1="150" y2="150" stroke="black"/>
+               <line x1="150" x2="150" y1="0" y2="300" stroke="black"/>
+               <!-- Стрелки к осям -->
+               <polygon points="150,0 145,15 155,15" stroke="black"/>
+               <polygon points="300,150 285,145 285,155" stroke="black"/>
+
+<!--                Метки для значений R на оси X -->
+               <line x1="#{(150 - 100 * (resultBean.newResult.r/ 4.0))}"
+                     x2="#{(150 - 100 * (resultBean.newResult.r / 4.0))}"
+                     y1="155"
+                     y2="145"
+                     stroke="black"/>
+               <line x1="#{(150 - 50 * (resultBean.newResult.r / 4.0))}"
+                     x2="#{(150 - 50 * (resultBean.newResult.r / 4.0))}"
+                     y1="155"
+                     y2="145"
+                     stroke="black"/>
+               <line x1="#{(150 + 50 * (resultBean.newResult.r / 4.0))}"
+                     x2="#{(150 + 50 * (resultBean.newResult.r / 4.0))}"
+                     y1="155"
+                     y2="145"
+                     stroke="black"/>
+               <line x1="#{(150 + 100 * (resultBean.newResult.r / 4.0))}"
+                     x2="#{(150 + 100 * (resultBean.newResult.r / 4.0))}"
+                     y1="155"
+                     y2="145"
+                     stroke="black"/>
+               <!-- Метки для значений R на оси Y -->
+               <line x1="145"
+                     x2="155"
+                     y1="#{(150 - 100 * (resultBean.newResult.r / 4.0))}"
+                     y2="#{(150 - 100 * (resultBean.newResult.r / 4.0))}"
+                     stroke="black"/>
+               <line x1="145"
+                     x2="155"
+                     y1="#{(150 - 50 * (resultBean.newResult.r / 4.0))}"
+                     y2="#{(150 - 50 * (resultBean.newResult.r / 4.0))}"
+                     stroke="black"/>
+               <line x1="145"
+                     x2="155"
+                     y1="#{(150 + 50 * (resultBean.newResult.r / 4.0))}"
+                     y2="#{(150 + 50 * (resultBean.newResult.r / 4.0))}"
+                     stroke="black"/>
+               <line x1="145"
+                     x2="155"
+                     y1="#{(150 + 100 * (resultBean.newResult.r / 4.0))}"
+                     y2="#{(150 + 100 * (resultBean.newResult.r / 4.0))}"
+                     stroke="black"/>
+
+               <!-- Четверть эллипса в четвертой четверти -->
+               <path stroke="blue" fill="blue" fill-opacity="0.3"
+                     d="M#{(150 + 100 * (resultBean.newResult.r / 4.0))},150 A#{(100 * (resultBean.newResult.r / 4.0))},
+                     #{(100 * (resultBean.newResult.r / 4.0))} 90 0,1 150,
+                     #{(150 + 100 * (resultBean.newResult.r / 4.0))} L 150,150 Z"/>
+
+               <!-- Треугольник в третьей четверти -->
+               <polygon stroke="blue" fill="blue" fill-opacity="0.3"
+                        points="#{(150 - 100 * (resultBean.newResult.r / 4.0))},150 150,150 150,
+                        #{(150 + 100 * (resultBean.newResult.r / 4.0))}"/>
+               <!-- Квадрат во второй четверти -->
+               <polygon stroke="blue" fill="blue" fill-opacity="0.3"
+                        points="#{(150 - 50 * (resultBean.newResult.r / 4.0))},#{(150 - 100 * (resultBean.newResult.r / 4.0))}
+                         150,#{(150 - 100 * (resultBean.newResult.r / 4.0))}
+                         150,150
+                        #{(150 - 50 * (resultBean.newResult.r / 4.0))},150"/>
+               <!---->
+               <!-- Подписи к осям -->
+               <text x="285" y="135" fill="black">X</text>
+               <text x="160" y="15" fill="black">Y</text>
+<!--                Значения R на оси X -->
+               <text x="#{(150 - 110 * (resultBean.newResult.r / 4.0)) * resultBean.isDrown}"
+                     y="#{140 * resultBean.isDrown}" fill="black">-R</text>
+               <text x="#{(150 - 65 * (resultBean.newResult.r / 4.0)) * resultBean.isDrown}"
+                     y="#{140 * resultBean.isDrown}" fill="black">-R/2</text>
+               <text x="#{(150 + 40 * (resultBean.newResult.r / 4.0)) * resultBean.isDrown}"
+                     y="#{140 * resultBean.isDrown}" fill="black">R/2</text>
+               <text x="#{(150 + 95 * (resultBean.newResult.r / 4.0)) * resultBean.isDrown}"
+                     y="#{140 * resultBean.isDrown}" fill="black">R</text>
+               <!-- Значения R на оси Y -->
+               <text x="160"
+                     y="#{(150 - 97.5 * (resultBean.newResult.r / 4.0)) * resultBean.isDrown}" fill="black">R</text>
+               <text x="160"
+                     y="#{(150 - 47.5 * (resultBean.newResult.r / 4.0)) * resultBean.isDrown}" fill="black">R/2</text>
+               <text x="160"
+                     y="#{(150 + 50.5 * (resultBean.newResult.r / 4.0)) * resultBean.isDrown}" fill="black">-R/2</text>
+               <text x="160"
+                     y="#{(150 + 102.5 * (resultBean.newResult.r / 4.0)) * resultBean.isDrown}" fill="black">-R</text>
+
+            </svg>
+               <ui:repeat value="#{resultBean.resultList}" var = "row" varStatus="status">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="svg_circle" width="300" height="300" onclick="checkHit()">
+                     <circle cx="#{150 + row.x / 4.0 * 100}"
+                             cy="#{150 - row.y / 4.0 * 100}"
+                             r="#{3 * resultBean.isPointer}"
+                             fill='#{row.result ? "green" : "red"}'/>
+                  </svg>
+
+               </ui:repeat>
+
+
+
+            </table>
+
+
+
+<!--         <table>-->
+<!--            <ui:repeat value="#{resultBean.resultList}" var = "row" varStatus="status">-->
+<!--               <tr>-->
+<!--                  <td>#{status.index + 1}</td>-->
+<!--                  <td>#{row.r}</td>-->
+<!--                  <td>#{row.r}</td>-->
+<!--               </tr>-->
+<!--               -->
+<!--               <svg xmlns="http://www.w3.org/2000/svg">-->
+<!--                  <circle cx="${150 + row.x / 4.0 * 100}"-->
+<!--                          cy="${150 - row.y / 4.0 * 100}"-->
+<!--                          r="#{3 * resultBean.isPointer}"-->
+<!--                          fill='#{point.result ? "green" : "red"}'/>-->
+<!--               </svg>-->
+
+<!--            </ui:repeat>-->
+<!--         </table>-->
+
+         </section>
+
+      </main>
+   </h:panelGroup>
+
+</ui:composition>
